@@ -1,4 +1,5 @@
 #!/bin/bash
+# From https://github.com/kernoeb/docker-markdown-pdf
 
 RED='\033[0;31m'
 RESET='\033[0m'
@@ -6,7 +7,7 @@ RESET='\033[0m'
 USAGE="Usage ./convert.sh -o <output_file> <doc_dir>"
 
 if [[ $1 == "-o" || $1 == "--output" ]]; then
-    OUTPUT=$2
+    OUTPUT="$(cd "$(dirname "$2")" || exit; pwd)/$(basename "$2")"
     shift
     shift
 else

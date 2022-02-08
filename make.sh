@@ -7,7 +7,7 @@ INSIDE_FILENAME="$(basename "$FILE_LOCATION")"
 FILENAME=$(mktemp).pdf
 
 # Get all directories
-alldirs=$(find . -type d | paste -sd:) || exit 1
+allDirs=$(find . -type d | paste -sd:) || exit 1
 
 # Get all the markdowns in order
 tmp=$(grep -oP '(?<=]\().*(?=\))' _sidebar.md | tr '\r\n' ' ') || exit 1
@@ -16,7 +16,7 @@ tmp=$(grep -oP '(?<=]\().*(?=\))' _sidebar.md | tr '\r\n' ' ') || exit 1
 pandoc $tmp -o "$FILENAME" "-fmarkdown-implicit_figures -o" \
   --from=markdown -V geometry:margin=.6in \
   --toc -V toc-title:"Table des matières" \
-  --resource-path $alldirs --variable urlcolor=cyan \
+  --resource-path $allDirs --variable urlcolor=cyan \
   --wrap=preserve -V documentclass=report \
   -V 'mainfont:Roboto-Regular' -V 'mainfontoptions:BoldFont=Roboto-Bold, ItalicFont=Roboto-Italic, BoldItalicFont=Roboto-BoldItalic' \
   --pdf-engine=xelatex || exit 1
@@ -26,7 +26,7 @@ gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="/tmp/$INSIDE_FILENAME" "
 
 # Fix permissions
 chmod ugo+rwx "/tmp/$INSIDE_FILENAME" || exit 1
-chown $CHOWN_IDU:$CHOWN_IDG "/tmp/$INSIDE_FILENAME" || exit 1
+chown "$CHOWN_IDU":"$CHOWN_IDG" "/tmp/$INSIDE_FILENAME" || exit 1
 
 rm "$FILENAME" || exit 1
 
