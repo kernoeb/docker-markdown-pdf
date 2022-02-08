@@ -5,5 +5,5 @@
 - Docker
 
 1. Create a `resources` folder with a `cover.pdf` file in it.
-2. Add your documentation into the `documentation` folder.
-3. Run `./convert.sh <output_file>.pdf` to generate a PDF file.
+2. Add your documentation in a directory with a `_sidebar.md` file.
+3. Run `./convert.sh -o <output_file>.pdf <doc_dir>` to generate a PDF file.
