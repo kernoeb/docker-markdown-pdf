@@ -64,5 +64,5 @@ rm "$OUTPUT"
 docker pull ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION"
 docker run \
   -e "CHOWN_IDU=$(id -u)" -e "CHOWN_IDG=$(id -g)" -e "FILE_LOCATION=$OUTPUT" \
-  -v "$(pwd)/resources:/resources" -v "$DOCUMENTATION_PATH":/workdir/documentation/:ro -v "$(dirname "$OUTPUT")":/tmp:rw \
+  -v "$(pwd)/resources:/resources" -v "$DOCUMENTATION_PATH":/app/documentation/:ro -v "$(dirname "$OUTPUT")":/tmp:rw \
   ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION"

@@ -22,6 +22,6 @@ RUN wget https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pando
 ADD make.sh /usr/bin/make.sh
 RUN chmod +x /usr/bin/make.sh
 
-WORKDIR /workdir
+WORKDIR /app
 
 ENTRYPOINT ["/usr/bin/make.sh"]

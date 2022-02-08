@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /documentation/ || exit 1
+cd /app/documentation/ || exit 1
 
 INSIDE_FILENAME="$(basename "$FILE_LOCATION")"
 
