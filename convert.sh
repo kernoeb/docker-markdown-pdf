@@ -28,9 +28,13 @@ if [ ! -f "resources/cover.pdf" ]; then
   exit 1
 fi
 
+VERSION="latest"
+#VERSION="main"
+
 rm "$1"
-docker build --tag pandoc-make .
+#docker build --tag pandoc-make .
+docker pull ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION"
 docker run \
   -e "CHOWN_IDU=$(id -u)" -e "CHOWN_IDG=$(id -g)" -e "FILE_LOCATION=$1" \
   -v "$(pwd)/resources:/resources" -v "$(pwd)/documentation:/workdir:ro" -v "$(dirname "$1")":/tmp:rw \
-  pandoc-make .
+  ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION" .
