@@ -15,7 +15,7 @@ tmp=$(grep -oP '(?<=]\().*(?=\))' _sidebar.md | tr '\r\n' ' ') || exit 1
 # Generate the PDF with pandoc
 pandoc $tmp -o "$FILENAME" "-fmarkdown-implicit_figures -o" \
   --from=markdown -V geometry:margin=.6in \
-  --toc -V toc-title:"Table des matières" \
+  --toc --toc-depth=1 -V toc-title:"Table des matières" \
   --resource-path $allDirs --variable urlcolor=cyan \
   --wrap=preserve -V documentclass=report \
   -V 'mainfont:Roboto-Regular' -V 'mainfontoptions:BoldFont=Roboto-Bold, ItalicFont=Roboto-Italic, BoldItalicFont=Roboto-BoldItalic' \
