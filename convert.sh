@@ -60,10 +60,10 @@ DOCUMENTATION_PATH="$(cd "$(dirname "$1")" || exit; pwd)/$(basename "$1")"
 VERSION="latest"
 #VERSION="main"
 
-rm "$OUTPUT"
+rm -f "$OUTPUT" ||:
 #docker build --tag pandoc-make .
 docker pull ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION"
-docker run \
+docker run --rm --name "docker-markdown-pdf" \
   -e "CHOWN_IDU=$(id -u)" -e "CHOWN_IDG=$(id -g)" -e "FILE_LOCATION=$OUTPUT" \
   -v "$(pwd)/resources:/resources" -v "$DOCUMENTATION_PATH":/app/documentation/:ro -v "$(dirname "$OUTPUT")":/tmp:rw \
   ghcr.io/kernoeb/docker-markdown-pdf:"$VERSION"
